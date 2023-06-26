@@ -1,0 +1,34 @@
+---
+    dt: 0.1
+    observation:
+        "/vicon/tisl_racecar/processed_odom":
+            type: Odometry
+            remap: "state"
+            options:
+                use_vel: True
+
+        "/imu":
+            type: Imu
+            N_per_step: 5
+            remap: "imu"
+            options:
+                orientation: False
+                angular_velocity: True
+                linear_acceleration: True
+
+        "/vesc/sensors/core":
+            type: VescState
+            remap: "speed"
+            N_per_step: 3
+
+        "/vesc/sensors/servo_position_command":
+            type: Float64
+            remap: "servo_position"
+            N_per_step: 3
+
+    action:
+        "/ackermann_cmd_mux/output":
+            type: AckermannDrive
+            options:
+                throttle: speed
+                steer: position
